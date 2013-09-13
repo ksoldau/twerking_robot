@@ -9,7 +9,6 @@ void setup() {
 void draw() 
 {
     background(255);
-    //translate(50, 50); // place robot so arms are always on screen
     drawRobot();
 }
 
@@ -23,9 +22,9 @@ void drawRobot()
   drawAntennae();
   drawHead();
   drawLegs();
-  drawArms();
-  drawAbdomen();
   drawBottom();
+  drawArms();
+  drawBreast();
   drawFeet();
 }
 
@@ -73,12 +72,12 @@ void drawMouth()
 
 void drawNeck() 
 {
-   noStroke();
-   fill(#CC00FF);
-   rect(-5, 30, 10, 50);
+   stroke(#CC00FF);
+   strokeWeight(6);
+   line(0, 30, 0, 100);
 }
 
-void drawAbdomen() 
+void drawBreast() 
 {
   noStroke();
   fill(#CC00FF);
@@ -92,7 +91,7 @@ void drawBottom()
 {
    noStroke();
    fill(#CC00FF);
-   rect(-40, 120, 80, 40);
+   rect(-45, 120, 90, 50);
 }
 
 void drawAntennae()
@@ -116,25 +115,26 @@ void drawAntennae()
 
 void drawLegs()
 {
-  noStroke();
+  stroke(#440088);
+  strokeWeight(8);
   fill(#440088);
   // left thigh
-  rect(-25, 160, 8, 30);
+  line(-20, 160, -25, 210);
+  // right thigh
+  line(20, 160, 25, 210);
   // left knee
-  ellipse(-23, 190, 18, 18);
+  noStroke();
+  ellipse(-25, 218, 18, 18);
+  // right knee
+  ellipse(25, 218, 18, 18);
   // left shin
   stroke(#440088);
   strokeWeight(8);
-  line(-23, 190, -15, 215);
-  // right thigh
-  noStroke();
-  rect(17, 160, 8, 30);
-  // right knee
-  ellipse(21, 190, 18, 18);
+  line(-25, 220, -15, 250);
   // right shin
   stroke(#440088);
   strokeWeight(8);
-  line(20, 190, 15, 215);
+  line(25, 220, 15, 250);
 }
 
 void drawFeet()
@@ -142,14 +142,15 @@ void drawFeet()
   noStroke();
   fill(#440088);
   // left foot
-  ellipse(-20, 220, 30, 12);
+  ellipse(-20, 250, 30, 12);
   // right foot
-  ellipse(18, 220, 30, 12);
+  ellipse(18, 250, 30, 12);
 }
 
 void drawArms() 
 {
   stroke(#440088);
+  fill(#440088);
   strokeWeight(5);
   // left upper arm
   line(-30, 90, -60, 150);
@@ -157,15 +158,17 @@ void drawArms()
   ellipse(-60, 150, 10, 10);
   // left forearm
   line(-60, 150, -50, 180);
-  // left hand
-  ellipse(-50, 180, 15, 15);
   // right upper arm
   line(30, 90, 60, 150);
   // right elbow
-  ellipse(-60, 150, 10, 10);
+  ellipse(60, 150, 10, 10);
   // right forearm
   line(60, 150, 50, 180);
+  // left hand
+  fill(#FF00CC);
+  noStroke();
+  ellipse(-50, 180, 18, 18);
   // right hand
-  ellipse(50, 180, 15, 15);
+  ellipse(50, 180, 18, 18);
 }
 
