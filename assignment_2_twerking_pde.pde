@@ -19,6 +19,11 @@ float timeInLoop()
   return (frameCount % FRAMES_IN_LOOP) / FRAME_RATE;
 }
 
+float frameInLoop()
+{
+  return frameCount % FRAMES_IN_LOOP;
+}
+
 void setup() {
   size(400, 400);
   smooth();
@@ -163,14 +168,19 @@ void drawLegs()
 
 void drawShins() 
 {
-  if (timeInLoop() < 1.5) 
+  if (shinAngle < 0)
+  {
+    shinAngle = 0;
+  }
+  else if (frameInLoop() < 40) 
   {
   shinAngle += shinAngleChange;
   }
-  if (timeInLoop() > 8)
+  else if (frameInLoop() > 200)
   {
     shinAngle -= shinAngleChange;
   }
+
   
   stroke(#440088);
   strokeWeight(8);
