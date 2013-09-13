@@ -158,15 +158,10 @@ void drawLegs()
   line(-20, 160, -25, 210);
   // right thigh
   line(20, 160, 25, 210);
-  // left knee
-  noStroke();
-  ellipse(-25, 218, 18, 18);
-  // right knee
-  ellipse(25, 218, 18, 18);
-  drawShins();
+  drawShinsAndKnees();
 }
 
-void drawShins() 
+void drawShinsAndKnees() 
 {
   if (shinAngle < 0)
   {
@@ -181,24 +176,34 @@ void drawShins()
     shinAngle -= shinAngleChange;
   }
 
-  
-  stroke(#440088);
-  strokeWeight(8);
   pushMatrix();
   
   // left shin
   pushMatrix();
+  
   translate(-15, 250);
   rotate(radians(-shinAngle));
+  stroke(#440088);
+  strokeWeight(8);
   line(-10, -30, 0, 0);
+  // left knee
+  noStroke();
+  ellipse(-10, -32, 18, 18);
+  
   popMatrix();
 
-  
   // right shin
   pushMatrix();
+  
   translate(15, 250);
   rotate(radians(shinAngle));
+  stroke(#440088);
+  strokeWeight(8);
   line(10, -30, 0, 0);
+  // right knee
+  noStroke();
+  ellipse(10, -32, 18, 18);
+  
   popMatrix();
   
   popMatrix();
