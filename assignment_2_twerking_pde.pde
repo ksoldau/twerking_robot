@@ -1,5 +1,9 @@
 // left/right is all from point of view of viewer, not of robot
 // this is run once
+
+int bottomAngle = 0;
+int bottomAngleChange = 3;
+
 void setup() {
   size(400, 400);
   smooth();
@@ -89,9 +93,20 @@ void drawBreast()
 
 void drawBottom() 
 {
+  bottomAngle += bottomAngleChange;
+  pushMatrix();
+  fill(0);
+  if (bottomAngle > 20 || bottomAngle < -20) //|| bottomAngle < 30)
+  {
+    bottomAngleChange = -bottomAngleChange;
+    bottomAngle += bottomAngleChange;
+  }
    noStroke();
    fill(#CC00FF);
-   rect(-45, 120, 90, 50);
+   translate(0, 120);
+   rotate(radians(bottomAngle));
+   rect(-45, 0, 90, 50);
+   popMatrix();
 }
 
 void drawAntennae()
