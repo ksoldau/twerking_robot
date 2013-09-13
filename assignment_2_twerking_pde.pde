@@ -1,18 +1,34 @@
 // left/right is all from point of view of viewer, not of robot
 // this is run once
 
+// for twerking bottom
 int bottomAngle = 0;
 int bottomAngleChange = 3;
+
+// shins
+float shinAngle = 0;
+float shinAngleChange = 0.5;
+
+// time that's passed
+final float FRAME_RATE = 30;
+final float FRAMES_IN_LOOP = 30 * 10;
+
+// returns where at in loop in seconds
+float timeInLoop()
+{
+  return (frameCount % FRAMES_IN_LOOP) / FRAME_RATE;
+}
 
 void setup() {
   size(400, 400);
   smooth();
-  frameRate(30);
+  frameRate(FRAME_RATE);
 }
 
 void draw() 
 {
     background(255);
+    fill(0);
     drawRobot();
 }
 
@@ -142,15 +158,60 @@ void drawLegs()
   ellipse(-25, 218, 18, 18);
   // right knee
   ellipse(25, 218, 18, 18);
-  // left shin
-  stroke(#440088);
-  strokeWeight(8);
-  line(-25, 220, -15, 250);
-  // right shin
-  stroke(#440088);
-  strokeWeight(8);
-  line(25, 220, 15, 250);
+  drawShins();
 }
+
+void drawShins() 
+{
+  if (timeInLoop() < 1.5) 
+  {
+  shinAngle += shinAngleChange;
+  }
+  if (timeInLoop() > 8)
+  {
+    shinAngle -= shinAngleChange;
+  }
+  
+  stroke(#440088);
+  strokeWeight(8);
+  pushMatrix();
+  
+  // left shin
+  pushMatrix();
+  translate(-15, 250);
+  rotate(radians(-shinAngle));
+  line(-10, -30, 0, 0);
+  popMatrix();
+
+  
+  // right shin
+  pushMatrix();
+  translate(15, 250);
+  rotate(radians(shinAngle));
+  line(10, -30, 0, 0);
+  popMatrix();
+  
+  popMatrix();
+}
+
+//void drawBottom() 
+//{
+//  bottomAngle += bottomAngleChange;
+//  pushMatrix();
+//  fill(0);
+//  if (bottomAngle > 20 || bottomAngle < -20) //|| bottomAngle < 30)
+//  {
+//    bottomAngleChange = -bottomAngleChange;
+//    bottomAngle += bottomAngleChange;
+//  }
+//   noStroke();
+//   fill(#CC00FF);
+//   translate(0, 120);
+//   rotate(radians(bottomAngle));
+//   rect(-45, 0, 90, 50);
+//   popMatrix();
+//}
+
 
 void drawFeet()
 {
