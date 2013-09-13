@@ -10,6 +10,10 @@ float shinAngle = 0; // also affects thigh, so thigh angle has to be greater to
 // move in opposite direction
 float shinAngleChange = 0.5;
 
+// thighs
+float thighAngle = 0;
+float thighAngleChange = 0.75;
+
 // time that's passed
 final float FRAME_RATE = 30;
 final float FRAMES_IN_LOOP = 30 * 10;
@@ -159,14 +163,17 @@ void drawLegs()
   if (shinAngle < 0)
   {
     shinAngle = 0;
+    thighAngle = 0;
   }
   else if (frameInLoop() < 40) 
   {
   shinAngle += shinAngleChange;
+  thighAngle += thighAngleChange;
   }
   else if (frameInLoop() > 200)
   {
     shinAngle -= shinAngleChange;
+    thighAngle -= thighAngleChange;
   }
 
   pushMatrix();
@@ -180,7 +187,11 @@ void drawLegs()
   strokeWeight(8);
   line(-10, -30, 0, 0);
   // left thigh
-  line(-5, -90, -10, -40);
+  pushMatrix();
+  translate(-10, -40);
+  rotate(radians(thighAngle));  
+  line(0, 0, 5, -50);
+  popMatrix();
   // left knee
   noStroke();
   ellipse(-10, -32, 18, 18);
@@ -196,7 +207,11 @@ void drawLegs()
   strokeWeight(8);
   line(10, -30, 0, 0);
   // right thigh
-  line(5, -90, 10, -40);
+  pushMatrix();
+  translate(10, -40);
+  rotate(radians(-thighAngle));
+  line(0, 0, -5, -50);
+  popMatrix();
   // right knee
   noStroke();
   ellipse(10, -32, 18, 18);
