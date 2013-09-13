@@ -48,13 +48,30 @@ void drawRobot()
   noStroke(); // no outline
   fill(#CC00FF);
   translate(200, 75);
+  
+  pushMatrix();
+  if (frameInLoop() < 40) 
+  {
+    translate(0, (frameInLoop() * 0.8));
+  }
+  else if (frameInLoop() > 260)
+  {
+    translate(0, 40 * 0.8 - ((frameInLoop() - 260) * 0.8));
+  }
+  else
+  {
+    translate(0, 40 * 0.8);
+  }
   drawNeck();
   drawAntennae();
   drawHead();
-  drawLegs();
-  drawBottom();
   drawArms();
   drawBreast();
+  popMatrix();
+  
+  drawLegs();
+  
+  drawBottom();
   drawFeet();
 }
 
@@ -119,6 +136,19 @@ void drawBreast()
 
 void drawBottom() 
 {
+  pushMatrix();
+  if (frameInLoop() < 40) 
+  {
+    translate(0, (frameInLoop() * 0.8));
+  }
+  else if (frameInLoop() > 260)
+  {
+    translate(0, 40 * 0.8 - ((frameInLoop() - 260) * 0.8));
+  }
+  else
+  {
+    translate(0, 40 * 0.8);
+  }
   bottomAngle += bottomAngleChange;
   pushMatrix();
   fill(0);
@@ -130,8 +160,9 @@ void drawBottom()
    noStroke();
    fill(#CC00FF);
    translate(0, 120);
-   rotate(radians(bottomAngle));
+   //rotate(radians(bottomAngle));
    rect(-45, 0, 90, 50);
+   popMatrix();
    popMatrix();
 }
 
@@ -170,7 +201,7 @@ void drawLegs()
   shinAngle += shinAngleChange;
   thighAngle += thighAngleChange;
   }
-  else if (frameInLoop() > 200)
+  else if (frameInLoop() > 260)
   {
     shinAngle -= shinAngleChange;
     thighAngle -= thighAngleChange;
