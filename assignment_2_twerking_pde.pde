@@ -50,6 +50,26 @@ void drawRobot()
   translate(200, 75);
   
   pushMatrix();
+  translateForSquat();
+  drawNeck();
+  drawAntennae();
+  drawHead();
+  drawBreast();
+  popMatrix();
+  
+  drawLegs();
+  
+  drawBottom();
+  
+  pushMatrix();
+  translateForSquat();
+  drawArms();
+  popMatrix();
+  drawFeet();
+}
+
+void translateForSquat() 
+{
   if (frameInLoop() < 40) 
   {
     translate(0, (frameInLoop() * 0.8));
@@ -62,17 +82,6 @@ void drawRobot()
   {
     translate(0, 40 * 0.8);
   }
-  drawNeck();
-  drawAntennae();
-  drawHead();
-  drawArms();
-  drawBreast();
-  popMatrix();
-  
-  drawLegs();
-  
-  drawBottom();
-  drawFeet();
 }
 
 void drawHead() 
