@@ -6,7 +6,8 @@ int bottomAngle = 0;
 int bottomAngleChange = 3;
 
 // shins
-float shinAngle = 0;
+float shinAngle = 0; // also affects thigh, so thigh angle has to be greater to 
+// move in opposite direction
 float shinAngleChange = 0.5;
 
 // time that's passed
@@ -154,15 +155,7 @@ void drawLegs()
   stroke(#440088);
   strokeWeight(8);
   fill(#440088);
-  // left thigh
-  line(-20, 160, -25, 210);
-  // right thigh
-  line(20, 160, 25, 210);
-  drawShinsAndKnees();
-}
-
-void drawShinsAndKnees() 
-{
+  
   if (shinAngle < 0)
   {
     shinAngle = 0;
@@ -178,7 +171,7 @@ void drawShinsAndKnees()
 
   pushMatrix();
   
-  // left shin
+  // left leg
   pushMatrix();
   
   translate(-15, 250);
@@ -186,6 +179,8 @@ void drawShinsAndKnees()
   stroke(#440088);
   strokeWeight(8);
   line(-10, -30, 0, 0);
+  // left thigh
+  line(-5, -90, -10, -40);
   // left knee
   noStroke();
   ellipse(-10, -32, 18, 18);
@@ -200,6 +195,8 @@ void drawShinsAndKnees()
   stroke(#440088);
   strokeWeight(8);
   line(10, -30, 0, 0);
+  // right thigh
+  line(5, -90, 10, -40);
   // right knee
   noStroke();
   ellipse(10, -32, 18, 18);
