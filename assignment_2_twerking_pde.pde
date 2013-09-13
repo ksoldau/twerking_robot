@@ -6,13 +6,18 @@ int bottomAngle = 0;
 int bottomAngleChange = 3;
 
 // shins
-float shinAngle = 0; // also affects thigh, so thigh angle has to be greater to 
+float shinAngle = 0; // also affects thigh
 // move in opposite direction
 float shinAngleChange = 0.5;
 
 // thighs
 float thighAngle = 0;
 float thighAngleChange = 0.75;
+
+// upper arms
+float upperArmAngle = 0; // also affects forearm/hand
+float upperArmAngleChange = 0.15;
+
 
 // time that's passed
 final float FRAME_RATE = 30;
@@ -261,25 +266,6 @@ void drawLegs()
   popMatrix();
 }
 
-//void drawBottom() 
-//{
-//  bottomAngle += bottomAngleChange;
-//  pushMatrix();
-//  fill(0);
-//  if (bottomAngle > 20 || bottomAngle < -20) //|| bottomAngle < 30)
-//  {
-//    bottomAngleChange = -bottomAngleChange;
-//    bottomAngle += bottomAngleChange;
-//  }
-//   noStroke();
-//   fill(#CC00FF);
-//   translate(0, 120);
-//   rotate(radians(bottomAngle));
-//   rect(-45, 0, 90, 50);
-//   popMatrix();
-//}
-
-
 void drawFeet()
 {
   noStroke();
@@ -295,14 +281,38 @@ void drawArms()
   stroke(#440088);
   fill(#440088);
   strokeWeight(5);
+  
+  if (upperArmAngle < 0) {
+    upperArmAngle = 0;
+  }
+  else if (frameInLoop() < 40) 
+  {
+    upperArmAngle += upperArmAngleChange;
+  }
+  else if (frameInLoop() > 260 && upperArmAngle > 0)
+  {
+    upperArmAngle -= upperArmAngleChange;
+  }
+  
+  pushMatrix();
   // left upper arm
-  line(-30, 90, -60, 150);
+  pushMatrix();
+  translate(-30, 90);
+  rotate(radians(upperArmAngle));
+  line(0, 0, -30, 60);
+  popMatrix();
   // left elbow
   ellipse(-60, 150, 10, 10);
   // left forearm
   line(-60, 150, -50, 180);
+  
+  
   // right upper arm
-  line(30, 90, 60, 150);
+  pushMatrix();
+  translate(30, 90);
+  rotate(radians(-upperArmAngle));
+  line(0, 0, 30, 60);
+  popMatrix();
   // right elbow
   ellipse(60, 150, 10, 10);
   // right forearm
@@ -313,5 +323,6 @@ void drawArms()
   ellipse(-50, 180, 18, 18);
   // right hand
   ellipse(50, 180, 18, 18);
+  popMatrix();
 }
 
