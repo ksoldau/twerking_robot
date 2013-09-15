@@ -18,6 +18,10 @@ float thighAngleChange = 0.75;
 float upperArmAngle = 0; // also affects forearm/hand
 float upperArmAngleChange = 0.15;
 
+// forearms
+float forearmAngle = 0;
+float forearmAngleChange = 0.75;
+
 
 // time that's passed
 final float FRAME_RATE = 80;
@@ -166,6 +170,11 @@ void drawBottom()
   bottomAngle += bottomAngleChange;
   pushMatrix();
   fill(0);
+    
+  if (frameInLoop() < 40 || frameInLoop() > 260)
+  {
+    bottomAngle = 0;
+  }
   if (bottomAngle > 20 || bottomAngle < -20) //|| bottomAngle < 30)
   {
     bottomAngleChange = -bottomAngleChange;
@@ -174,7 +183,7 @@ void drawBottom()
    noStroke();
    fill(#CC00FF);
    translate(0, 120);
-   //rotate(radians(bottomAngle));
+   rotate(radians(bottomAngle));
    rect(-45, 0, 90, 50);
    popMatrix();
    popMatrix();
@@ -284,14 +293,17 @@ void drawArms()
   
   if (upperArmAngle < 0) {
     upperArmAngle = 0;
+    forearmAngle = 0;
   }
   else if (frameInLoop() < 40) 
   {
     upperArmAngle += upperArmAngleChange;
+    forearmAngle += forearmAngleChange;
   }
   else if (frameInLoop() > 260 && upperArmAngle > 0)
   {
     upperArmAngle -= upperArmAngleChange;
+    forearmAngle -= forearmAngleChange;
   }
   
   pushMatrix();
@@ -303,12 +315,16 @@ void drawArms()
   line(0, 0, -30, 60);
   // left elbow
   ellipse(-30, 60, 10, 10);
+  pushMatrix();
+  translate(-30, 60);
+  rotate(radians(-forearmAngle));
   // left forearm
-  line(-30, 60, -20, 90);
+  line(0, 0, 10, 30);
   // left hand
   fill(#FF00CC);
   noStroke();
-  ellipse(-20, 90, 18, 18);
+  ellipse(10, 30, 18, 18);
+  popMatrix();
   popMatrix();
   
   stroke(#440088);
@@ -322,12 +338,16 @@ void drawArms()
   line(0, 0, 30, 60);
   // right elbow
   ellipse(30, 60, 10, 10);
+  pushMatrix();
+  translate(30, 60);
+  rotate(radians(forearmAngle));
   // right forearm
-  line(30, 60, 20, 90);
+  line(0, 0, -10, 30);
   // right hand
   fill(#FF00CC);
   noStroke();
-  ellipse(20, 90, 18, 18);
+  ellipse(-10, 30, 18, 18);
+  popMatrix();
   popMatrix();
   
   popMatrix();
