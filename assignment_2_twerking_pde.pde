@@ -295,17 +295,25 @@ void drawArms()
   }
   
   pushMatrix();
-  // left upper arm
+  // left  arm
   pushMatrix();
   translate(-30, 90);
   rotate(radians(upperArmAngle));
+  // upper arm
   line(0, 0, -30, 60);
   // left elbow
   ellipse(-30, 60, 10, 10);
-  popMatrix();
   // left forearm
-  line(-60, 150, -50, 180);
+  line(-30, 60, -20, 90);
+  // left hand
+  fill(#FF00CC);
+  noStroke();
+  ellipse(-20, 90, 18, 18);
+  popMatrix();
   
+  stroke(#440088);
+  fill(#440088);
+  strokeWeight(5);
   
   // right upper arm
   pushMatrix();
@@ -314,15 +322,14 @@ void drawArms()
   line(0, 0, 30, 60);
   // right elbow
   ellipse(30, 60, 10, 10);
-  popMatrix();
   // right forearm
-  line(60, 150, 50, 180);
-  // left hand
+  line(30, 60, 20, 90);
+  // right hand
   fill(#FF00CC);
   noStroke();
-  ellipse(-50, 180, 18, 18);
-  // right hand
-  ellipse(50, 180, 18, 18);
+  ellipse(20, 90, 18, 18);
+  popMatrix();
+  
   popMatrix();
 }
 
