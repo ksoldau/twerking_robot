@@ -102,10 +102,6 @@ void drawSky()
    skyBlue = floor(frameCount % FRAMES_IN_LOOP * (125 / FRAMES_IN_LOOP));
   }
   background(skyRed, skyGreen, skyBlue);
-  // 50, 150, 250
-  //int skyRed = floor(50 - (frameInLoop() * 0.17));
-  //int skyGreen = floor(150 - (frameInLoop() * 0.5));
-  //int skyBlue = floor(250 - (frameInLoop() * .83));
 }
 
 void drawSunOrMoon() 
