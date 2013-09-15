@@ -20,7 +20,7 @@ float upperArmAngleChange = 0.15;
 
 
 // time that's passed
-final float FRAME_RATE = 30;
+final float FRAME_RATE = 80;
 final float FRAMES_IN_LOOP = 30 * 10;
 
 // returns where at in loop in seconds
@@ -300,9 +300,9 @@ void drawArms()
   translate(-30, 90);
   rotate(radians(upperArmAngle));
   line(0, 0, -30, 60);
-  popMatrix();
   // left elbow
-  ellipse(-60, 150, 10, 10);
+  ellipse(-30, 60, 10, 10);
+  popMatrix();
   // left forearm
   line(-60, 150, -50, 180);
   
@@ -312,9 +312,9 @@ void drawArms()
   translate(30, 90);
   rotate(radians(-upperArmAngle));
   line(0, 0, 30, 60);
-  popMatrix();
   // right elbow
-  ellipse(60, 150, 10, 10);
+  ellipse(30, 60, 10, 10);
+  popMatrix();
   // right forearm
   line(60, 150, 50, 180);
   // left hand
