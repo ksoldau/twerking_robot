@@ -28,9 +28,6 @@ float sunAngleChange = 0.3;
 float moonAngle = 0;
 float moonAngleChange = 0.3;
 
-// for tracking
-float robotX = 200;
-float robotY = 75;
 
 // time that's passed
 final float FRAME_RATE = 80;
@@ -139,30 +136,8 @@ void drawSunOrMoon()
 void drawRobot() 
 {
   noStroke(); // no outline
-  fill(#CC00FF);  
-  // translate up/down bc of mouse
-  if (mouseY < robotY + 120 )
-  {
-    robotY -= 1;
-  }
-  else if (mouseY > robotY + 120)
-  {
-    robotY += 1;
-  }
-  
-  // translate left/right bc of mouse
-  if (mouseX < robotX)
-  {
-    robotX -= 1;
-  }
-  else if (mouseX > robotX)
-  {
-    robotX += 1;
-  }
-
-  translate(robotX, robotY);
-  
-  
+  fill(#CC00FF);
+  translate(200, 75);
   
   pushMatrix();
   translateForSquat();
@@ -458,4 +433,5 @@ void drawArms()
   
   popMatrix();
 }
+
 
