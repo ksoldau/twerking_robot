@@ -22,6 +22,12 @@ float upperArmAngleChange = 0.15;
 float forearmAngle = 0;
 float forearmAngleChange = 0.75;
 
+// sun
+float sunAngle = 0;
+float sunAngleChange = 0.3;
+float moonAngle = 0;
+float moonAngleChange = 0.3;
+
 
 // time that's passed
 final float FRAME_RATE = 80;
@@ -38,6 +44,11 @@ float frameInLoop()
   return frameCount % FRAMES_IN_LOOP;
 }
 
+float loopNumber()
+{
+  return frameCount / FRAMES_IN_LOOP;
+}
+
 void setup() {
   size(400, 400);
   smooth();
@@ -46,9 +57,83 @@ void setup() {
 
 void draw() 
 {
-    background(255);
-    fill(0);
+    drawBackground();
     drawRobot();
+}
+
+void drawBackground() 
+{
+  drawSky();
+ 
+  drawSunOrMoon();
+  
+  fill(0, 130, 0);
+  rect(0, 300, width, 100);
+}
+
+void drawSky()
+{
+  int skyRed = 0;
+  int skyGreen = 0;
+  int skyBlue = 0;
+  
+  if (loopNumber() % 4 < 1)
+  {
+   skyRed =  25 + floor(frameCount % FRAMES_IN_LOOP * (25 / FRAMES_IN_LOOP));
+   skyGreen = 75 + floor(frameCount % FRAMES_IN_LOOP * (75 / FRAMES_IN_LOOP));
+   skyBlue = 125 + floor(frameCount % FRAMES_IN_LOOP * (125 / FRAMES_IN_LOOP));
+  }
+  else if (loopNumber() % 4 < 2)
+  {
+   skyRed =  floor(50 - frameCount % FRAMES_IN_LOOP * (25 / FRAMES_IN_LOOP));
+   skyGreen = floor(150 - frameCount % FRAMES_IN_LOOP * (75 / FRAMES_IN_LOOP));
+   skyBlue = floor(250 - frameCount % FRAMES_IN_LOOP * (125 / FRAMES_IN_LOOP));
+  }
+  else if (loopNumber() % 4 < 3) 
+  {
+   skyRed =  25 - floor(frameCount % FRAMES_IN_LOOP * (25 / FRAMES_IN_LOOP));
+   skyGreen = 75 - floor(frameCount % FRAMES_IN_LOOP * (75 / FRAMES_IN_LOOP));
+   skyBlue = 125 - floor(frameCount % FRAMES_IN_LOOP * (125 / FRAMES_IN_LOOP));
+  }
+  else
+  {
+   skyRed =  floor(frameCount % FRAMES_IN_LOOP * (25 / FRAMES_IN_LOOP));
+   skyGreen = floor(frameCount % FRAMES_IN_LOOP * (75 / FRAMES_IN_LOOP));
+   skyBlue = floor(frameCount % FRAMES_IN_LOOP * (125 / FRAMES_IN_LOOP));
+  }
+  background(skyRed, skyGreen, skyBlue);
+  // 50, 150, 250
+  //int skyRed = floor(50 - (frameInLoop() * 0.17));
+  //int skyGreen = floor(150 - (frameInLoop() * 0.5));
+  //int skyBlue = floor(250 - (frameInLoop() * .83));
+}
+
+void drawSunOrMoon() 
+{
+  if (loopNumber() % 4 < 2)
+  {
+    sunAngle += sunAngleChange;
+    moonAngle = 0;
+  }
+  else {
+    sunAngle = 0;
+    moonAngle += moonAngleChange;
+  }
+  fill(255, 255, 100);
+  
+  pushMatrix();
+  translate(220, 340);
+  rotate(radians(sunAngle + 90));
+  ellipse(0, 200, 45, 45);
+  popMatrix();
+  
+  pushMatrix();
+  fill(250);
+  translate(220, 340);
+  rotate(radians(moonAngle + 90));
+  //ellipse(0, 200, 40, 40);
+  arc(0, 200, 30, 30, 0, PI, CHORD);
+  popMatrix();
 }
 
 // the twerking robot
