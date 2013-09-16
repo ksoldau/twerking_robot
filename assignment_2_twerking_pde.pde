@@ -109,6 +109,8 @@ void drawSky()
 
 void drawSunOrMoon() 
 {
+  pushMatrix();
+  translate(100, 0);
   if (loopNumber() % 4 < 2)
   {
     sunAngle += sunAngleChange;
@@ -121,9 +123,9 @@ void drawSunOrMoon()
   fill(255, 255, 100);
   
   pushMatrix();
-  translate(220, 340);
+  translate(260, 340);
   rotate(radians(sunAngle + 90));
-  ellipse(0, 200, 45, 45);
+  ellipse(0, 300, 45, 45);
   popMatrix();
   
   pushMatrix();
@@ -131,7 +133,8 @@ void drawSunOrMoon()
   translate(220, 340);
   rotate(radians(moonAngle + 90));
   //ellipse(0, 200, 40, 40);
-  arc(0, 200, 30, 30, 0, PI, CHORD);
+  arc(0, 300, 30, 30, 0, PI, CHORD);
+  popMatrix();
   popMatrix();
 }
 
