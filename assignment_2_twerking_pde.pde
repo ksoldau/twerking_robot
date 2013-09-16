@@ -71,7 +71,7 @@ void drawBackground()
   drawSunOrMoon();
   
   fill(0, 130, 0);
-  rect(0, 300, width, 100);
+  rect(0, 250, width, 400);
 }
 
 void drawSky()
