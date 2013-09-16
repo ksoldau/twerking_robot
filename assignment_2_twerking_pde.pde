@@ -53,7 +53,7 @@ float loopNumber()
 }
 
 void setup() {
-  size(400, 400);
+  size(700, 400);
   smooth();
   frameRate(FRAME_RATE);
 }
