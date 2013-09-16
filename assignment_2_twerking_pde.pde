@@ -144,21 +144,21 @@ void drawRobot()
   noStroke(); // no outline
   fill(#CC00FF);  
   // translate up/down bc of mouse
-  if (mouseY < robotY + 120 )
+  if (mouseY < robotY + 260 )
   {
     robotY -= 1;
   }
-  else if (mouseY > robotY + 120)
+  else if (mouseY > robotY + 260)
   {
     robotY += 1;
   }
   
   // translate left/right bc of mouse
-  if (mouseX < robotX)
+  if (mouseX < robotX + 1)
   {
     robotX -= 1;
   }
-  else if (mouseX > robotX)
+  else if (mouseX > robotX + 1)
   {
     robotX += 1;
   }
