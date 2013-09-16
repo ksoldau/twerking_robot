@@ -36,6 +36,9 @@ float robotY = 75;
 final float FRAME_RATE = 80;
 final float FRAMES_IN_LOOP = 30 * 10;
 
+//
+float flowerScale = 1;
+
 // returns where at in loop in seconds
 float timeInLoop()
 {
@@ -72,6 +75,7 @@ void drawBackground()
   
   fill(0, 130, 0);
   rect(0, 250, width, 400);
+  drawFlowers();
 }
 
 void drawSky()
@@ -122,12 +126,14 @@ void drawSunOrMoon()
   }
   fill(255, 255, 100);
   
+  // sun 
   pushMatrix();
   translate(260, 340);
   rotate(radians(sunAngle + 90));
   ellipse(0, 300, 45, 45);
   popMatrix();
   
+  // moon 
   pushMatrix();
   fill(250);
   translate(220, 340);
@@ -461,4 +467,68 @@ void drawArms()
   
   popMatrix();
 }
+
+void drawFlowers()
+{
+  fill(200, 100, 100);
+  if (loopNumber() % 4 < 1)
+  {
+      flowerScale += 0.002;
+  }
+  else if (loopNumber() % 4 < 2)
+  {
+    flowerScale -= 0.002;
+  }
+  pushMatrix();
+  translate(300,300);
+  scale(flowerScale);
+  flower(5, 7, 30);
+  popMatrix();
+  pushMatrix();
+  translate(400, 350);
+  scale(flowerScale);
+  fill(120, 60, 70);
+  flower(6, 6, 20);
+  popMatrix();
+  pushMatrix();
+  translate(650, 290);
+  rotate(HALF_PI);
+  fill(180, 50, 100);
+  scale(flowerScale);
+  flower(6, 7, 30);
+  popMatrix();
+  pushMatrix();
+  fill(120, 60, 60);
+  translate(40, 360);
+  scale(flowerScale);
+  flower(5, 5, 25);
+  popMatrix();
+}
+// code given to us
+
+void flower( int numLeafs, float innerRadius, float outerRadius )
+{
+    float angleStep = TWO_PI / numLeafs;
+    
+    beginShape();
+
+    float startX = cos( 0 ) * innerRadius;
+    float startY = sin( 0 ) * outerRadius; 
+    
+    vertex( startX, startY );
+    
+    for ( int i = 0; i < numLeafs; i++ ) {
+        float cx1 = cos( angleStep * i ) * outerRadius;
+        float cy1 = sin( angleStep * i ) * outerRadius;
+        float x2 = cos( angleStep * (i + 1) ) * innerRadius; 
+        float y2 = sin( angleStep * (i + 1) ) * innerRadius; 
+        float cx2 = cos( angleStep * (i + 1) ) * outerRadius; 
+        float cy2 = sin( angleStep * (i + 1) ) * outerRadius;
+        
+        bezierVertex( cx1, cy1, cx2, cy2, x2, y2 );
+    }
+    
+    endShape( CLOSE );
+}
+
 
